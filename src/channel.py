@@ -25,30 +25,6 @@ class Channel:
         self.video_count = channel['items'][0]['statistics']['videoCount']
         self.viewCount = channel['items'][0]['statistics']['viewCount']
 
-    def __str__(self):
-        return f'{self.title}, {self.url}'
-
-    def __add__(self, other):
-        return int(self.subscriberCount) + int(other.subscriberCount)
-
-    def __sub__(self, other):
-        return int(self.subscriberCount) - int(other.subscriberCount)
-
-    def __gt__(self, other):
-        return int(self.subscriberCount) > int(other.subscriberCount)
-
-    def __ge__(self, other):
-        return int(self.subscriberCount) >= int(other.subscriberCount)
-
-    def __lt__(self, other):
-        return int(self.subscriberCount) < int(other.subscriberCount)
-
-    def __le__(self, other):
-        return int(self.subscriberCount) <= int(other.subscriberCount)
-
-    def __eq__(self, other):
-        return int(self.subscriberCount) == int(other.subscriberCount)
-
     def print_info(self) -> None:
         """
         метод-класса `Channel` выводит в консоль информацию о канале.
