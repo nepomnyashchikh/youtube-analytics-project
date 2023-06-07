@@ -16,7 +16,7 @@ class Channel:
         """
         Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API.
         """
-        self.channel_id = channel_id
+        self.__channel_id = channel_id
         channel = Channel.get_service().channels().list(id=channel_id, part='snippet,statistics').execute()
         self.title = channel['items'][0]['snippet']['title']
         self.description = channel['items'][0]['snippet']['description']
@@ -57,6 +57,19 @@ class Channel:
         info = json.dumps(channel, indent=2, ensure_ascii=False)
         print(info)
 
+
+    @property
+    def channel_id(self) -> str:
+        return self.__channel_id
+
+    @channel_id.setter
+    def channel_id(self, channel_id):
+        try:
+            channel_id[:2] != 'UC'
+
+        except:
+            print('Нельзя менять')
+
     @classmethod
     def get_service(cls):
         """
@@ -69,7 +82,7 @@ class Channel:
         """
         метод `to_json()`, сохраняющий в файл значения атрибутов экземпляра `Channel`
         """
-        self.dict_hw_2['id'] = self.__channel_id
+        self.dict_hw_2['id'] = self.channel_id
         self.dict_hw_2['title'] = self.title
         self.dict_hw_2['description'] = self.description
         self.dict_hw_2['url'] = self.url
